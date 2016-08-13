@@ -499,13 +499,14 @@ uv.Graph.prototype.setLegend = function () {
         if(self.config.legend.position === 'right'){
           return 'translate(10,' + 10* (2* i - 1) + ')';
         }else if(self.config.legend.position === 'bottom'){
-          var hPos = 100*i - self.config.dimension.width*self.config.legend.legendstart;
-          var vPos = 20*self.config.legend.legendstart;
-          if(hPos >= self.config.dimension.width){
-            self.config.legend.legendstart = self.config.legend.legendstart + 1;
-            hPos = 100*i - self.config.dimension.width*self.config.legend.legendstart;
-            vPos = 20*self.config.legend.legendstart;
-          }
+            var hOffset = self.config.legend.hoffset;
+            var hPos = hOffset * i - (hOffset * Math.floor(self.config.dimension.width / hOffset)) * self.config.legend.legendstart;
+            var vPos = 20 * self.config.legend.legendstart;
+            if (hPos + hOffset >= self.config.dimension.width) {
+                self.config.legend.legendstart = self.config.legend.legendstart + 1;
+                hPos = hOffset * i - (hOffset * Math.floor(self.config.dimension.width / hOffset)) * self.config.legend.legendstart;
+                vPos = 20 * self.config.legend.legendstart;
+            }
           return 'translate(' + hPos + ',' + vPos + ')';
         }
       })

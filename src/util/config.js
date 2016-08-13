@@ -161,6 +161,7 @@ uv.config = {
     legendstart: 0,
     legendtype: 'categories',
     showlegends: true,
+    hoffset: 100,
   },
 
   effects: {
