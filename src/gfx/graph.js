@@ -386,6 +386,14 @@ uv.Graph.prototype.drawHorizontalAxis = function () {
                 .style('font-weight', self.config.label.fontweight)
                 .call(self.axes.hor.func);
 
+  if (self.config.axis.rotatexlabels != 0) {
+    self.axes.hor.axis.selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", function (d) { return "rotate(" + self.config.axis.rotatexlabels + ")"; });
+  }
+  
   if (self.config.axis.showticks) {
     self.axes.hor.axis.selectAll('line').style('stroke', self.config.axis.strokecolor)
                 .style('opacity', self.config.axis.opacity);

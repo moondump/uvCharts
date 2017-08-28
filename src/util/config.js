@@ -54,7 +54,8 @@ uv.config = {
     showtext: true,
     showhortext: true,
     showvertext: true,
-    opacity: 0.1
+    opacity: 0.1,
+	rotatexlabels: 0
   },
 
   label: {
