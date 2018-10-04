@@ -381,7 +381,7 @@ uv.config = {
     min: 0,
     custompalette: [],
     opacity: 1,
-    responsive: false,
+    responsive: true,
     align: 'xMinYMin',
     meetOrSlice: 'meet'
   },
@@ -428,7 +428,8 @@ uv.config = {
     showtext: true,
     showhortext: true,
     showvertext: true,
-    opacity: 0.1
+    opacity: 0.1,
+	rotatexlabels: 0
   },
 
   label: {
@@ -535,6 +536,7 @@ uv.config = {
     legendstart: 0,
     legendtype: 'categories',
     showlegends: true,
+    hoffset: 100,
   },
 
   effects: {
@@ -1240,6 +1242,14 @@ uv.Graph.prototype.drawHorizontalAxis = function () {
                 .style('font-weight', self.config.label.fontweight)
                 .call(self.axes.hor.func);
 
+  if (self.config.axis.rotatexlabels != 0) {
+    self.axes.hor.axis.selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", function (d) { return "rotate(" + self.config.axis.rotatexlabels + ")"; });
+  }
+  
   if (self.config.axis.showticks) {
     self.axes.hor.axis.selectAll('line').style('stroke', self.config.axis.strokecolor)
                 .style('opacity', self.config.axis.opacity);
@@ -1350,16 +1360,18 @@ uv.Graph.prototype.setLegend = function () {
 
   self.legends.enter().append('g')
       .attr('transform', function (d, i) {
-        if(self.config.legend.position === 'right'){
+        if (self.config.legend.position === 'right') {
           return 'translate(10,' + 10* (2* i - 1) + ')';
-        }else if(self.config.legend.position === 'bottom'){
-          var hPos = 100*i - self.config.dimension.width*self.config.legend.legendstart;
-          var vPos = 20*self.config.legend.legendstart;
-          if(hPos >= self.config.dimension.width){
+        } else if (self.config.legend.position === 'bottom') {
+          var hOffset = self.config.legend.hoffset;
+          var hPos = hOffset * i - (hOffset * Math.floor(self.config.dimension.width / hOffset)) * self.config.legend.legendstart;
+          var vPos = 20 * self.config.legend.legendstart;
+          if (hPos + hOffset >= self.config.dimension.width) {
             self.config.legend.legendstart = self.config.legend.legendstart + 1;
-            hPos = 100*i - self.config.dimension.width*self.config.legend.legendstart;
-            vPos = 20*self.config.legend.legendstart;
+            hPos = hOffset * i - (hOffset * Math.floor(self.config.dimension.width / hOffset)) * self.config.legend.legendstart;
+            vPos = 20 * self.config.legend.legendstart;
           }
+
           return 'translate(' + hPos + ',' + vPos + ')';
         }
       })
@@ -1655,7 +1667,7 @@ uv.AreaGraph.prototype.drawHorizontalArea = function (areagroup, idx) {
   areagroup.line = areagroup.path.append('svg:path')
         .classed(uv.constants.classes.linepath + idx, true)
         .attr('d', areagroup.linefunc)
-        .style('stroke', 'white')
+        .style('stroke', color)
         .style('fill', 'none');
 
   areagroup.path.selectAll('.' + uv.constants.classes.dot)
@@ -1665,7 +1677,7 @@ uv.AreaGraph.prototype.drawHorizontalArea = function (areagroup, idx) {
         .attr('cx', areagroup.linefunc.x())
         .attr('cy', areagroup.linefunc.y())
         .attr('r', 3.5)
-        .style('fill', 'white');
+        .style('fill', color);
 };
 
 uv.AreaGraph.prototype.drawVerticalArea = function (areagroup, idx) {
@@ -1695,7 +1707,7 @@ uv.AreaGraph.prototype.drawVerticalArea = function (areagroup, idx) {
   areagroup.line = areagroup.path.append('svg:path')
         .classed(uv.constants.classes.linepath + idx, true)
         .attr('d', areagroup.linefunc)
-        .style('stroke', 'white')
+        .style('stroke', color)
         .style('fill', 'none');
 
   areagroup.path.selectAll('.' + uv.constants.classes.dot)
@@ -1705,7 +1717,7 @@ uv.AreaGraph.prototype.drawVerticalArea = function (areagroup, idx) {
         .attr('cx', areagroup.linefunc.x())
         .attr('cy', areagroup.linefunc.y())
         .attr('r', 3.5)
-        .style('fill', 'white');
+        .style('fill', color);
 };
 
 /**
