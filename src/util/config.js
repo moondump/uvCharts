@@ -54,7 +54,8 @@ uv.config = {
     showtext: true,
     showhortext: true,
     showvertext: true,
-    opacity: 0.1
+    opacity: 0.1,
+	rotatexlabels: 0
   },
 
   label: {
@@ -161,6 +162,7 @@ uv.config = {
     legendstart: 0,
     legendtype: 'categories',
     showlegends: true,
+    hoffset: 100,
   },
 
   effects: {

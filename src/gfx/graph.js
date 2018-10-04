@@ -386,6 +386,14 @@ uv.Graph.prototype.drawHorizontalAxis = function () {
                 .style('font-weight', self.config.label.fontweight)
                 .call(self.axes.hor.func);
 
+  if (self.config.axis.rotatexlabels != 0) {
+    self.axes.hor.axis.selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em")
+      .attr("transform", function (d) { return "rotate(" + self.config.axis.rotatexlabels + ")"; });
+  }
+  
   if (self.config.axis.showticks) {
     self.axes.hor.axis.selectAll('line').style('stroke', self.config.axis.strokecolor)
                 .style('opacity', self.config.axis.opacity);
@@ -499,13 +507,14 @@ uv.Graph.prototype.setLegend = function () {
         if(self.config.legend.position === 'right'){
           return 'translate(10,' + 10* (2* i - 1) + ')';
         }else if(self.config.legend.position === 'bottom'){
-          var hPos = 100*i - self.config.dimension.width*self.config.legend.legendstart;
-          var vPos = 20*self.config.legend.legendstart;
-          if(hPos >= self.config.dimension.width){
-            self.config.legend.legendstart = self.config.legend.legendstart + 1;
-            hPos = 100*i - self.config.dimension.width*self.config.legend.legendstart;
-            vPos = 20*self.config.legend.legendstart;
-          }
+            var hOffset = self.config.legend.hoffset;
+            var hPos = hOffset * i - (hOffset * Math.floor(self.config.dimension.width / hOffset)) * self.config.legend.legendstart;
+            var vPos = 20 * self.config.legend.legendstart;
+            if (hPos + hOffset >= self.config.dimension.width) {
+                self.config.legend.legendstart = self.config.legend.legendstart + 1;
+                hPos = hOffset * i - (hOffset * Math.floor(self.config.dimension.width / hOffset)) * self.config.legend.legendstart;
+                vPos = 20 * self.config.legend.legendstart;
+            }
           return 'translate(' + hPos + ',' + vPos + ')';
         }
       })
