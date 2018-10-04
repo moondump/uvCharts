@@ -6,7 +6,7 @@ To learn more about uvCharts and how to use it, read the [wiki](http://www.githu
 
 Checkout [releases](http://www.github.com/Imaginea/uvCharts/releases) to get the latest release of uvCharts. The downloadable artifact will contain the minified and non-minified library file for you to use.
 
-### Current release: uvCharts-v1.1.3
+### Current release: uvCharts-v1.1.6
 
 Charts supported at the current moment are:
 
@@ -36,7 +36,7 @@ You can find the documentation [here](http://imaginea.github.io/uvCharts/documen
 - Support for negative axis in Bar, Line, Area, Step Up bar charts (**New** since 1.1.0)
 - Configurable (about 110 ways already)
 - Cool transitions and effects
-- Power of d3 exposed in the form of d3 selections in the resultant uvChart object 
+- Extendable - since d3 selections are exposed for direct manipulation if needed
 
 #### Current roadmap
 Checkout [milestones](https://github.com/Imaginea/uvCharts/milestones) to find plans for future releases underway.

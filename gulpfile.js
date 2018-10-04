@@ -24,19 +24,19 @@ var paths = {
 };
 
 gulp.task('clean:dev', function (cb) {
-  del(['build/*'], cb);
+  return del(['build/*'], cb);
 });
 
 gulp.task('clean:gfx', function (cb) {
-  del(['build/uvcharts*.js'], cb);
+  return del(['build/uvcharts*.js'], cb);
 });
 
 gulp.task('clean:test', function (cb) {
-  del(['build/uvtest*.js'], cb);
+  return del(['build/uvtest*.js'], cb);
 });
 
 gulp.task('clean:all', function (cb) {
-  del(['build/*', 'dist/*'], cb);
+  return del(['build/*', 'dist/*'], cb);
 });
 
 gulp.task('bower', function () {

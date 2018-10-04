@@ -1,8 +1,24 @@
 {
   "name": "uvCharts",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Easy yet powerful JavaScript Charting library built using d3.js",
-  "keywords": ["charts", "d3", "api", "easy", "robust", "configurable", "bar", "area", "pie", "donut", "waterfall", "column", "percent", "line", "chart"],
+  "keywords": [
+    "charts",
+    "d3",
+    "api",
+    "easy",
+    "robust",
+    "configurable",
+    "bar",
+    "area",
+    "pie",
+    "donut",
+    "waterfall",
+    "column",
+    "percent",
+    "line",
+    "chart"
+  ],
   "homepage": "https://imaginea.github.io/uvCharts",
   "bugs": {
     "url": "https://github.com/imaginea/uvCharts/issues",
@@ -48,6 +64,7 @@
     "gulp-watch": "^4.2.4",
     "gulp-webserver": "^0.9.1",
     "gulp-zip": "^3.0.2",
+    "jshint": "^2.9.6",
     "jshint-stylish": "^2.0.1"
   }
 }
