@@ -60,6 +60,10 @@ That is a nice dataset we have there for uvCharts. Lets go ahead and plot this i
 
 Thats it, your chart is ready. The chart is by default placed in a DOM element with id 'uv-div' and this can be overridden (more on it later).
 
+Make sure you have a div on your page for the chart to be placed in.
+
+  <div id="uv-div"></div>
+
 Here is the interesting part, no matter which chart you want to represent your data in, the graph definition doesn't change. So if you want to represent the data in the form of a line chart.
 
 	var chart = uv.chart('Line', graphdef);
